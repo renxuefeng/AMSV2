@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\amsv2.Core\amsv2.Core.csproj" />
+    <ProjectReference Include="..\amsv2.Model\amsv2.Model.csproj" />
+    <ProjectReference Include="..\amsv2.Repository\amsv2.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

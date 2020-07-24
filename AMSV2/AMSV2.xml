@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AMSV2</name>
+    </assembly>
+    <members>
+        <member name="P:AMSV2.Controllers.BaseController.UserName">
+            <summary>
+            当前Token中包含的用户名
+            </summary>
+        </member>
+        <member name="P:AMSV2.Controllers.BaseController.Role">
+            <summary>
+            当前Token中包含用户角色
+            </summary>
+        </member>
+        <member name="M:AMSV2.Controllers.LoginController.Login(AMSV2.Models.LoginInfo)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="loginInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Helpers.StartupHelper.InitializationIOC(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            初始化IOC
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Helpers.StartupHelper.ConfigureQuartz(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            调度任务
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Helpers.StartupHelper.ConfigureRepositories(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注入仓储
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Helpers.StartupHelper.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注入服务
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Helpers.StartupHelper.ConfigureLocalization(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            配置支持语言种类
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:AMSV2.Helpers.StartupHelper.SeedData(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            初始化数据
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="P:AMSV2.Models.LoginInfo.userName">
+            <summary>
+            登录名
+            </summary>
+        </member>
+        <member name="P:AMSV2.Models.LoginInfo.password">
+            <summary>
+            密码
+            </summary>
+        </member>
+    </members>
+</doc>
