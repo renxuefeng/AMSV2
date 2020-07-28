@@ -121,7 +121,7 @@ namespace AMSV2
                     };
                 });
             // 配置调度任务
-            services.ConfigureQuartz();
+            //services.ConfigureQuartz();
             services.AddControllers().AddDataAnnotationsLocalization(options =>
             {
                 options.DataAnnotationLocalizerProvider = (type, factory) =>

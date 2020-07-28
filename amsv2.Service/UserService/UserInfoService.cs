@@ -34,18 +34,18 @@ namespace amsv2.Service.UserService
 
         public async Task<List<UserInfo>> GetUserList(Expression<Func<UserInfo, bool>> where = null)
         {
-            return await _userRepository.GetAllList(where);
+            return await _userRepository.GetAllList(where,null);
         }
 
-        public async Task<PageModel> GetUserList(int startPage, int pageSize, Expression<Func<UserInfo, bool>> where = null, Expression<Func<UserInfo, object>> order = null)
+        public async Task<PageModel> GetUserList(PageModel pageModel, Expression<Func<UserInfo, bool>> where = null, Expression<Func<UserInfo, object>> order = null)
         {
-            return await _userRepository.LoadPageList(startPage, pageSize, where, order);
+            return await _userRepository.LoadPageList(pageModel, where, order);
         }
 
         public async Task<string> GetUserPermission(UserInfo userInfo)
         {
             List<int> moduleList = new List<int>();
-            if (userInfo.Roles != null && userInfo.Roles.Count > 0)
+            if (userInfo.Roles != null && userInfo.Roles?.ToList().Count > 0)
             {
                 foreach (var v in userInfo.Roles)
                 {

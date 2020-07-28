@@ -21,6 +21,51 @@
             <param name="loginInfo"></param>
             <returns></returns>
         </member>
+        <member name="M:AMSV2.Controllers.LoginController.Logout">
+            <summary>
+            用户登出
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Controllers.UserController.Get">
+            <summary>
+            获取已登录用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Controllers.UserController.GetUserList">
+            <summary>
+            获取用户列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Controllers.UserController.GetUserListByPage(amsv2.Model.Dto.PageModel)">
+            <summary>
+            获取用户列表(分页)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Controllers.UserController.Create(amsv2.Model.Dto.UserInfoDto)">
+            <summary>
+            新建用户
+            </summary>
+            <param name="userInfoDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Controllers.UserController.Update(amsv2.Model.Dto.UserInfoDto)">
+            <summary>
+            编辑用户
+            </summary>
+            <param name="userInfoDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Controllers.UserController.Delete(System.Int64)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:AMSV2.Helpers.StartupHelper.InitializationIOC(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             初始化IOC

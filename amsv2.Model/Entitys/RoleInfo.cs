@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace amsv2.Model.Entitys
 {
@@ -43,7 +44,9 @@ namespace amsv2.Model.Entitys
         public DateTime CreateDateTime { get; set; }
         [Required]
         public long CreateUserID { get; set; }
+        [JsonIgnore]
         public List<UserInRole> Users { get; set; }
+        [JsonIgnore]
         public List<RoleInModule> Modules { get; set; }
     }
 }

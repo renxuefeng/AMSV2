@@ -1,0 +1,27 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+WORKDIR /app
+ENV ASPNETCORE_URLS http://+:50001
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+WORKDIR /src
+COPY ["AMSV2/AMSV2.csproj", "AMSV2/"]
+COPY ["amsv2.Core/amsv2.Core.csproj", "amsv2.Core/"]
+COPY ["amsv2.Common/amsv2.Common.csproj", "amsv2.Common/"]
+COPY ["amsv2.Repository/amsv2.Repository.csproj", "amsv2.Repository/"]
+COPY ["amsv2.Model/amsv2.Model.csproj", "amsv2.Model/"]
+COPY ["amsv2.Service/amsv2.Service.csproj", "amsv2.Service/"]
+RUN dotnet restore "AMSV2/AMSV2.csproj"
+COPY . .
+WORKDIR "/src/AMSV2"
+RUN dotnet build "AMSV2.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "AMSV2.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "AMSV2.dll"]

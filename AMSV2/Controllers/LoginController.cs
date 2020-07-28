@@ -63,5 +63,17 @@ namespace AMSV2.Controllers
             }
             return _responseData;
         }
+        /// <summary>
+        /// 用户登出
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Logout")]
+        public async Task<ActionResult<ResponseData>> Logout()
+        {
+            await Task.Delay(100);
+            _responseData.Success = true;
+            return _responseData;
+        }
     }
+
 }

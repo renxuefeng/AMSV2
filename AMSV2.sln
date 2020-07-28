@@ -3,17 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMSV2", "AMSV2\AMSV2.csproj", "{68044CDC-896E-40D1-BC0C-8C960021A886}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AMSV2", "AMSV2\AMSV2.csproj", "{68044CDC-896E-40D1-BC0C-8C960021A886}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amsv2.Common", "amsv2.Common\amsv2.Common.csproj", "{DB6D8F7D-AE3D-49F3-973B-AFCB041ECACF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "amsv2.Common", "amsv2.Common\amsv2.Common.csproj", "{DB6D8F7D-AE3D-49F3-973B-AFCB041ECACF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amsv2.Core", "amsv2.Core\amsv2.Core.csproj", "{7B07A1FB-BE42-48EA-AFFC-4ADDF2B0086E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "amsv2.Core", "amsv2.Core\amsv2.Core.csproj", "{7B07A1FB-BE42-48EA-AFFC-4ADDF2B0086E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amsv2.Model", "amsv2.Model\amsv2.Model.csproj", "{69383AC5-D4ED-4BEC-8B27-C3197F058AF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "amsv2.Model", "amsv2.Model\amsv2.Model.csproj", "{69383AC5-D4ED-4BEC-8B27-C3197F058AF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amsv2.Repository", "amsv2.Repository\amsv2.Repository.csproj", "{584BB2B9-BAD7-4CBB-A017-3F1B2EBFFFB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "amsv2.Repository", "amsv2.Repository\amsv2.Repository.csproj", "{584BB2B9-BAD7-4CBB-A017-3F1B2EBFFFB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amsv2.Service", "amsv2.Service\amsv2.Service.csproj", "{5BD1E3A2-BC5C-4F35-AA70-F0F47D453332}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "amsv2.Service", "amsv2.Service\amsv2.Service.csproj", "{5BD1E3A2-BC5C-4F35-AA70-F0F47D453332}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E18A51FB-9301-417A-8F24-3FA3919DF224}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

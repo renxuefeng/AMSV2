@@ -20,36 +20,50 @@ namespace amsv2.Repository.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<List<TEntity>> GetAllList(Expression<Func<TEntity, bool>> predicate = null, params Expression<Func<TEntity, object>>[] Includes)
+        public async Task<List<TEntity>> GetAllList()
         {
-            return await _dbContext.Set<TEntity>().Where(predicate).IncludeMultiple(Includes).ToListAsync();
+            return await _dbContext.Set<TEntity>().ToListAsync();
         }
-        public async Task<PageModel> LoadPageList(int startPage, int pageSize, Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, object>> order, bool asc = true)
+        public async Task<List<TEntity>> GetAllList(Expression<Func<TEntity, bool>> predicate, Func<IIncludable<TEntity>, IIncludable> includes)
         {
-            PageModel pageModel = new PageModel();
+            return await _dbContext.Set<TEntity>().Where(predicate).IncludeMultiple(includes).ToListAsync();
+        }
+        public async Task<PageModel> LoadPageList(PageModel pageModel, Expression<Func<TEntity, bool>> where)
+        {
+            return await LoadPageList(pageModel, where, null);
+        }
+        public async Task<PageModel> LoadPageList(PageModel pageModel, Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, object>> order, bool asc = true)
+        {
+            return await LoadPageList(pageModel, where,null, order,asc);
+        }
+        public async Task<PageModel> LoadPageList(PageModel pageModel, Expression<Func<TEntity, bool>> where, Func<IIncludable<TEntity>, IIncludable> includes, Expression<Func<TEntity, object>> order, bool asc = true)
+        {
             var result = from p in _dbContext.Set<TEntity>()
                          select p;
             if (where != null)
                 result = result.Where(where);
+            if (includes != null)
+                result = result.IncludeMultiple(includes);
             if (order != null)
                 result = result.OrderBy(order);
             else
                 result = result.OrderBy(m => m.Id);
             pageModel.rowCount = result.Count();
-            pageModel.pageCount = pageModel.rowCount / pageSize;
-            if (pageModel.rowCount % pageSize != 0)
+            pageModel.pageCount = pageModel.rowCount / pageModel.pageSize;
+            if (pageModel.rowCount % pageModel.pageSize != 0)
             {
                 //如果余数不为0总页数就加上1
                 pageModel.pageCount = pageModel.pageCount + 1;
             }
             // 请求的起始页大于总页数则取最后一页数据
-            if (pageModel.pageCount > 0 && startPage > pageModel.pageCount)
+            if (pageModel.pageCount > 0 && pageModel.startPage > pageModel.pageCount)
             {
-                startPage = pageModel.pageCount;
+                pageModel.startPage = pageModel.pageCount;
             }
-            pageModel.data = await result.Skip((startPage - 1) * pageSize).Take(pageSize).ToListAsync();
+            pageModel.data = await result.Skip((pageModel.startPage - 1) * pageModel.pageSize).Take(pageModel.pageSize).ToListAsync();
             return pageModel;
         }
+
         public async Task<TEntity> Get(TPrimaryKey id)
         {
             return await _dbContext.Set<TEntity>().SingleAsync(CreateEqualityExpressionForId(id));
@@ -128,6 +142,19 @@ namespace amsv2.Repository.Repositories
         {
             return await _dbContext.Set<TEntity>().IncludeMultiple(Includes).SingleOrDefaultAsync(predicate);
         }
+
+        public async Task<TEntity> Get(TPrimaryKey id, Func<IIncludable<TEntity>, IIncludable> includes)
+        {
+            return await _dbContext.Set<TEntity>()
+        .IncludeMultiple(includes)
+        .SingleOrDefaultAsync(CreateEqualityExpressionForId(id));
+        }
+
+        public async Task<List<TEntity>> GetAllList(Func<IIncludable<TEntity>, IIncludable> includes)
+        {
+            return await _dbContext.Set<TEntity>().IncludeMultiple(includes).ToListAsync();
+        }
+
     }
     public abstract class RepositoryBase<TEntity> : RepositoryBase<TEntity,long> where TEntity : Entity
     {

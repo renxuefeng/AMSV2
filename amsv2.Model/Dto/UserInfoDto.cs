@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using System.Text.Json.Serialization;
 
-namespace amsv2.Model.Entitys
+namespace amsv2.Model.Dto
 {
-    [Table("UserInfo")]
-    public class UserInfo : Entity
+    public class UserInfoDto
     {
+        public long id { get; set; }
         /// <summary>
         /// 用户名
         /// </summary>
@@ -81,29 +79,6 @@ namespace amsv2.Model.Entitys
         [MaxLength(50)]
         [StringLength(30, ErrorMessage = "工作单位长度不能超过30个字符")]
         public string WorkUnit { get; set; }
-
-        /**********************************************************************************************//**
-         * @property    public long CreateUserID
-         *
-         * @brief   创建人ID
-         *
-         * @return  The identifier of the create user.
-         **************************************************************************************************/
-
-        [Required]
-        public long CreateUserID { get; set; }
-
-        /**********************************************************************************************//**
-         * @property    public DateTime CreateUserTime
-         *
-         * @brief   创建时间
-         *
-         * @return  The create user time.
-         **************************************************************************************************/
-        public DateTime CreateUserTime { get; set; }
-        [JsonIgnore]
-        public List<UserInRole> Roles { get; set; }
-        [JsonIgnore]
-        public List<UserInModule> Modules { get; set; }
+        public List<long> RoleIDS { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace amsv2.Service.UserService
         /// <param name="where"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        Task<PageModel> GetUserList(int startPage, int pageSize, Expression<Func<UserInfo, bool>> where = null, Expression<Func<UserInfo, object>> order = null);
+        Task<PageModel> GetUserList(PageModel pageModel, Expression<Func<UserInfo, bool>> where = null, Expression<Func<UserInfo, object>> order = null);
         /// <summary>
         /// 新增
         /// </summary>

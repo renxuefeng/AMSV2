@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace amsv2.Model.Entitys
 {
@@ -24,7 +25,9 @@ namespace amsv2.Model.Entitys
         /// 是否启用
         /// </summary>
         public bool isEnable { get; set; }
+        [JsonIgnore]
         public List<UserInModule> Users { get; set; }
+        [JsonIgnore]
         public List<RoleInModule> Roles { get; set; }
     }
 }
