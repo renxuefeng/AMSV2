@@ -7,7 +7,7 @@ namespace amsv2.Model.Dto
 {
     public class UserInfoDto
     {
-        public long id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// 用户名
         /// </summary>

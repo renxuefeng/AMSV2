@@ -9,6 +9,7 @@ namespace amsv2.Model.Dto
 {
     public class RoleInfoDto
     {
+        public long Id { get; set; }
         /// <summary>
         /// 角色名称
         /// </summary>

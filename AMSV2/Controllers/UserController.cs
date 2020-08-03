@@ -150,9 +150,9 @@ namespace AMSV2.Controllers
         [HttpPut]
         public async Task<ActionResult<ResponseData>> Update(UserInfoDto userInfoDto)
         {
-            if (userInfoDto != null && userInfoDto.id > 0)
+            if (userInfoDto != null && userInfoDto.Id > 0)
             {
-                var userInfo = await _userRepository.Get(userInfoDto.id,i=>i.Include(x=>x.Roles).ThenInclude(x=>x.Role));
+                var userInfo = await _userRepository.Get(userInfoDto.Id, i=>i.Include(x=>x.Roles).ThenInclude(x=>x.Role));
                 if (userInfo != null)
                 {
                     userInfoDto.MapTo(userInfo);

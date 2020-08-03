@@ -27,11 +27,37 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AMSV2.Controllers.RoleController.GetUserList">
+            <summary>
+            获取角色列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Controllers.RoleController.GetUserListByPage(amsv2.Model.Dto.PageModel)">
+            <summary>
+            获取角色列表(分页)
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:AMSV2.Controllers.RoleController.Create(amsv2.Model.Dto.RoleInfoDto)">
             <summary>
             新建角色
             </summary>
             <param name="roleInfoDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Controllers.RoleController.Update(amsv2.Model.Dto.RoleInfoDto)">
+            <summary>
+            编辑角色
+            </summary>
+            <param name="roleInfoDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AMSV2.Controllers.RoleController.Delete(System.Int64)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:AMSV2.Controllers.UserController.Get">

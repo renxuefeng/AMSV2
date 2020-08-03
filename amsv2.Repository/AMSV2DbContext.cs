@@ -96,7 +96,7 @@ namespace amsv2.Repository
             {
                 Id = 1,
                 RoleName = "默认角色",
-                CreateUser = "System",
+                CreateUserName = "System",
             });
             // 权限菜单信息
             int id = 1;

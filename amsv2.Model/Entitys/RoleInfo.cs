@@ -44,7 +44,10 @@ namespace amsv2.Model.Entitys
         public DateTime CreateDateTime { get; set; }
         [Required]
         [StringLength(20)]
-        public string CreateUser { get; set; }
+        public string CreateUserName { get; set; }
+        public DateTime LastUpdateDateTime { get; set; }
+        [StringLength(20)]
+        public string LastUpdateUserName { get; set; }
         [JsonIgnore]
         public List<UserInRole> Users { get; set; }
         [JsonIgnore]

@@ -332,3 +332,6 @@ amsv2.Repository/Data/Migrations/AMSV2DbContextModelSnapshot.cs
 amsv2.Repository/Data/Migrations/20200724063538_AMSV2DbInit.cs
 amsv2.Repository/Data/Migrations/20200724063538_AMSV2DbInit.Designer.cs
 amsv2.Repository/Data/Migrations/AMSV2DbContextModelSnapshot.cs
+/AMSV2/bin/Release/netcoreapp3.1
+/AMSV2/Logs/Warning
+/AMSV2/obj/Release/netcoreapp3.1/PubTmp/Out

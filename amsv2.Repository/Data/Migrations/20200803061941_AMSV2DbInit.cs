@@ -31,7 +31,9 @@ namespace amsv2.Repository.Data.Migrations
                     RoleName = table.Column<string>(maxLength: 20, nullable: false),
                     Description = table.Column<string>(maxLength: 20, nullable: true),
                     CreateDateTime = table.Column<DateTime>(nullable: false),
-                    CreateUserID = table.Column<long>(nullable: false)
+                    CreateUserName = table.Column<string>(maxLength: 20, nullable: false),
+                    LastUpdateDateTime = table.Column<DateTime>(nullable: false),
+                    LastUpdateUserName = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,6 +69,7 @@ namespace amsv2.Repository.Data.Migrations
                     RoleId = table.Column<long>(nullable: false),
                     ModuleId = table.Column<long>(nullable: false),
                     Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -92,6 +95,7 @@ namespace amsv2.Repository.Data.Migrations
                     UserId = table.Column<long>(nullable: false),
                     moduleId = table.Column<long>(nullable: false),
                     Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -117,6 +121,7 @@ namespace amsv2.Repository.Data.Migrations
                     UserId = table.Column<long>(nullable: false),
                     RoleId = table.Column<long>(nullable: false),
                     Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -153,16 +158,16 @@ namespace amsv2.Repository.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "RoleInfo",
-                columns: new[] { "Id", "CreateDateTime", "CreateUserID", "Description", "RoleName" },
-                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, null, "默认角色" });
+                columns: new[] { "Id", "CreateDateTime", "CreateUserName", "Description", "LastUpdateDateTime", "LastUpdateUserName", "RoleName" },
+                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "System", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "默认角色" });
 
             migrationBuilder.InsertData(
                 table: "UserInfo",
                 columns: new[] { "Id", "CreateUserID", "CreateUserTime", "Gender", "Name", "Password", "Status", "UserName", "UserPic", "UserType", "WorkUnit" },
                 values: new object[,]
                 {
-                    { 1511L, 0L, new DateTime(2020, 7, 24, 14, 35, 36, 776, DateTimeKind.Local).AddTicks(8429), 0, null, "123456", 0, "admin", null, 1, null },
-                    { 1512L, 0L, new DateTime(2020, 7, 24, 14, 35, 36, 789, DateTimeKind.Local).AddTicks(4930), 0, null, "123456", 0, "rxf", null, 0, null }
+                    { 1511L, 0L, new DateTime(2020, 8, 3, 14, 19, 39, 209, DateTimeKind.Local).AddTicks(2178), 0, null, "123456", 0, "admin", null, 1, null },
+                    { 1512L, 0L, new DateTime(2020, 8, 3, 14, 19, 39, 222, DateTimeKind.Local).AddTicks(2616), 0, null, "123456", 0, "rxf", null, 0, null }
                 });
 
             migrationBuilder.InsertData(

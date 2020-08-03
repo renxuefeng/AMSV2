@@ -10,7 +10,7 @@ using amsv2.Repository;
 namespace amsv2.Repository.Data.Migrations
 {
     [DbContext(typeof(AMSV2DbContext))]
-    [Migration("20200724063538_AMSV2DbInit")]
+    [Migration("20200803061941_AMSV2DbInit")]
     partial class AMSV2DbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,7 +117,9 @@ namespace amsv2.Repository.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("Id")
-                        .HasColumnType("bigint");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("RoleId", "ModuleId");
 
@@ -192,10 +194,19 @@ namespace amsv2.Repository.Data.Migrations
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("CreateUserID")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CreateUserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<DateTime>("LastUpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastUpdateUserName")
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
@@ -216,7 +227,8 @@ namespace amsv2.Repository.Data.Migrations
                         {
                             Id = 1L,
                             CreateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreateUserID = 0L,
+                            CreateUserName = "System",
+                            LastUpdateDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RoleName = "默认角色"
                         });
                 });
@@ -230,7 +242,9 @@ namespace amsv2.Repository.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("Id")
-                        .HasColumnType("bigint");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("UserId", "moduleId");
 
@@ -248,7 +262,9 @@ namespace amsv2.Repository.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("Id")
-                        .HasColumnType("bigint");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("UserId", "RoleId");
 
@@ -320,7 +336,7 @@ namespace amsv2.Repository.Data.Migrations
                         {
                             Id = 1511L,
                             CreateUserID = 0L,
-                            CreateUserTime = new DateTime(2020, 7, 24, 14, 35, 36, 776, DateTimeKind.Local).AddTicks(8429),
+                            CreateUserTime = new DateTime(2020, 8, 3, 14, 19, 39, 209, DateTimeKind.Local).AddTicks(2178),
                             Gender = 0,
                             Password = "123456",
                             Status = 0,
@@ -331,7 +347,7 @@ namespace amsv2.Repository.Data.Migrations
                         {
                             Id = 1512L,
                             CreateUserID = 0L,
-                            CreateUserTime = new DateTime(2020, 7, 24, 14, 35, 36, 789, DateTimeKind.Local).AddTicks(4930),
+                            CreateUserTime = new DateTime(2020, 8, 3, 14, 19, 39, 222, DateTimeKind.Local).AddTicks(2616),
                             Gender = 0,
                             Password = "123456",
                             Status = 0,
