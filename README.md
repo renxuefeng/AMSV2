@@ -11,3 +11,5 @@
 ## 容器化
 * AMSV2项目中新增Dockerfile文件，发布好的项目直接调用生成镜像即可
 * 项目已部署在群辉NAS的docker中，地址:http://home.kaixixi.vip:60001/index.html
+## UnitOfWork
+* 工作单元模式做事务处理
