@@ -128,7 +128,7 @@ namespace AMSV2.Controllers
             return _responseData;
         }
         /// <summary>
-        /// 删除用户
+        /// 删除角色
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
