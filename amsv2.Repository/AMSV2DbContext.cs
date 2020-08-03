@@ -12,7 +12,6 @@ namespace amsv2.Repository
     {
         public AMSV2DbContext(DbContextOptions<AMSV2DbContext> options) : base(options)
         {
-
         }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<ModuleInfo> ModuleInfo { get; set; }
@@ -97,7 +96,7 @@ namespace amsv2.Repository
             {
                 Id = 1,
                 RoleName = "默认角色",
-                CreateUserID = 0,
+                CreateUser = "System",
             });
             // 权限菜单信息
             int id = 1;

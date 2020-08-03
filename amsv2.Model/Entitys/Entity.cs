@@ -7,6 +7,7 @@ namespace amsv2.Model.Entitys
 {
     public abstract class Entity<TPrimaryKey>
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual TPrimaryKey Id { get; set; }
 
     }

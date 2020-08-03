@@ -2,6 +2,7 @@
 using amsv2.Core.Dependency;
 using amsv2.Repository;
 using amsv2.Repository.IRepositories;
+using amsv2.Repository.UnitOfWork;
 using AMSV2.Authorization;
 using AMSV2.Jobs;
 using AMSV2.Models;
@@ -37,6 +38,7 @@ namespace AMSV2.Helpers
             services.AddSingleton(rootConfiguration);
             services.AddSingleton<IAuthorizationPolicyProvider, WebMethodActionPolicyProvider>();
             services.AddSingleton<IAuthorizationHandler, WebMethodActionHandler>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ResponseData>();
             var audienceConfiguration = configuration.GetSection(nameof(AudienceConfiguration)).Get<AudienceConfiguration>();
             services.AddSingleton(audienceConfiguration);
