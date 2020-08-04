@@ -338,3 +338,4 @@ amsv2.Repository/Data/Migrations/AMSV2DbContextModelSnapshot.cs
 AMSV2/appsettings.json
 AMSV2/Logs/Information/log20200804.txt
 AMSV2/Logs/Debug/log20200804.txt
+/AMSV2/Logs/*
