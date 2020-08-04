@@ -336,3 +336,5 @@ amsv2.Repository/Data/Migrations/AMSV2DbContextModelSnapshot.cs
 /AMSV2/Logs/Warning
 /AMSV2/obj/Release/netcoreapp3.1/PubTmp/Out
 AMSV2/appsettings.json
+AMSV2/Logs/Information/log20200804.txt
+AMSV2/Logs/Debug/log20200804.txt
