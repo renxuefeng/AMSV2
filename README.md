@@ -13,3 +13,5 @@
 * 项目已部署在群辉NAS的docker中，地址:http://home.kaixixi.vip:60001/index.html
 ## UnitOfWork
 * 工作单元模式做事务处理
+## 缓存
+* Redis做数据缓存
