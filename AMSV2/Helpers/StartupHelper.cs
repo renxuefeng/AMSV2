@@ -1,5 +1,6 @@
 ﻿using amsv2.Core.Configuration;
 using amsv2.Core.Dependency;
+using amsv2.Core.Redis;
 using amsv2.Repository;
 using amsv2.Repository.IRepositories;
 using amsv2.Repository.UnitOfWork;
@@ -42,6 +43,9 @@ namespace AMSV2.Helpers
             services.AddTransient<ResponseData>();
             var audienceConfiguration = configuration.GetSection(nameof(AudienceConfiguration)).Get<AudienceConfiguration>();
             services.AddSingleton(audienceConfiguration);
+            services.AddSingleton<IRedisCacheManager, RedisCacheManager>();
+            var redisConfiguration = configuration.GetSection(nameof(RedisConfiguration)).Get<RedisConfiguration>();
+            services.AddSingleton(redisConfiguration);
             // 注册autoMapper服务
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             // 多语言资源目录

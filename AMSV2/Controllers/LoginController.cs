@@ -1,5 +1,6 @@
 ﻿using amsv2.Core.Configuration;
 using amsv2.Core.JWT;
+using amsv2.Core.Redis;
 using amsv2.Model.Entitys;
 using amsv2.Repository.IRepositories;
 using amsv2.Service.UserService;
@@ -23,12 +24,14 @@ namespace AMSV2.Controllers
         private readonly ResponseData _responseData;
         private readonly AudienceConfiguration _audienceConfiguration;
         private readonly IStringLocalizer<LoginController> _stringLocalizer;
-        public LoginController(IUserInfoService userInfoService, ResponseData responseData, AudienceConfiguration audienceConfiguration, IStringLocalizer<LoginController> stringLocalizer)
+        private readonly IRedisCacheManager _redisCacheManager;
+        public LoginController(IRedisCacheManager redisCacheManager, IUserInfoService userInfoService, ResponseData responseData, AudienceConfiguration audienceConfiguration, IStringLocalizer<LoginController> stringLocalizer)
         {
             _userInfoService = userInfoService;
             _responseData = responseData;
             _audienceConfiguration = audienceConfiguration;
             _stringLocalizer = stringLocalizer;
+            _redisCacheManager = redisCacheManager;
         }
         /// <summary>
         /// 用户登录
@@ -53,6 +56,8 @@ namespace AMSV2.Controllers
                 var identity = new ClaimsIdentity(JwtBearerDefaults.AuthenticationScheme);
                 identity.AddClaims(claims);
                 var token = JWTHelper.BuildJwtToken(claims.ToArray(), _audienceConfiguration);
+                //_redisCacheManager.Set(user.UserName, user, TimeSpan.FromMinutes(10));
+                //_redisCacheManager.Get<UserInfo>(user.UserName);
                 _responseData.Success = true;
                 _responseData.Data = token;
             }

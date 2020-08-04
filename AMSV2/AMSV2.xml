@@ -55,7 +55,7 @@
         </member>
         <member name="M:AMSV2.Controllers.RoleController.Delete(System.Int64)">
             <summary>
-            删除用户
+            删除角色
             </summary>
             <param name="id"></param>
             <returns></returns>
