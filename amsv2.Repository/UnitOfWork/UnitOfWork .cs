@@ -1,80 +1,129 @@
-﻿using AutoMapper.Configuration;
+﻿using amsv2.Model.Entitys;
+using amsv2.Repository.IRepositories;
+using amsv2.Repository.Repositories;
+using AutoMapper.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace amsv2.Repository.UnitOfWork
 {
     /// <summary>
     /// 工作单元
     /// </summary>
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork<TContext> : IUnitOfWork<TContext> where TContext : DbContext
     {
-        private bool _disposed;
-        private IDbContextTransaction _trans = null;
-        protected readonly AMSV2DbContext _dbContext;
-        /// <summary>
-        /// 事务
-        /// </summary>
-        public IDbContextTransaction DbTransaction { get { return _trans; } }
+        protected readonly TContext _context;
+        protected bool _disposed = false;
+        protected Dictionary<Type, object> _repositories;
 
-        private IDbConnection _connection;
-        /// <summary>
-        /// 数据连接
-        /// </summary>
-        public IDbConnection DbConnection { get { return _connection; } }
-
-        public UnitOfWork(AMSV2DbContext dbContext)
+        public UnitOfWork(TContext context)
         {
-            _dbContext = dbContext;
-            //var connectionString = configuration.GetConnectionString("SqlConnection");
-            ////_connection = new MySqlConnection(connectionString);//MySqlConnector
-            //_connection = new ProfiledDbConnection(new MySqlConnection(connectionString), MiniProfiler.Current);
-            //_connection.Open();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         /// <summary>
-        /// 开启事务
+        /// 获取DbContext
         /// </summary>
-        public void BeginTransaction()
+        public TContext DbContext => _context;
+        /// <summary>
+        /// 开始一个事务
+        /// </summary>
+        /// <returns></returns>
+        public IDbContextTransaction BeginTransaction()
         {
-            _trans = _dbContext.Database.BeginTransaction();
+            return _context.Database.BeginTransaction();
         }
+
         /// <summary>
-        /// 完成事务
+        /// 获取指定仓储
         /// </summary>
-        public void Commit() => _trans?.Commit();
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="hasCustomRepository"></param>
+        /// <returns></returns>
+        public IRepository<TEntity,long> GetRepository<TEntity>(bool hasCustomRepository = false) where TEntity : Entity
+        {
+            if (_repositories == null)
+            {
+                _repositories = new Dictionary<Type, object>();
+            }
+
+            Type type = typeof(IRepository<TEntity>);
+            if (!_repositories.TryGetValue(type, out object repo))
+            {
+                IRepository<TEntity,long> newRepo = new RepositoryBase<TEntity>(_context);
+                _repositories.Add(type, newRepo);
+                return newRepo;
+            }
+            return (IRepository<TEntity>)repo;
+        }
+
         /// <summary>
-        /// 回滚事务
+        /// 执行原生sql语句
         /// </summary>
-        public void Rollback() => _trans?.Rollback();
+        /// <param name="sql">sql语句</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        public int ExecuteSqlCommand(string sql, params object[] parameters) => _context.Database.ExecuteSqlRaw(sql, parameters);
+
+        /// <summary>
+        /// 使用原生sql查询来获取指定数据
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        public IQueryable<TEntity> FromSql<TEntity>(string sql, params object[] parameters) where TEntity : Entity => _context.Set<TEntity>().FromSqlRaw(sql, parameters);
+
+        /// <summary>
+        /// DbContext提交修改
+        /// </summary>
+        /// <returns></returns>
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// DbContext提交修改（异步）
+        /// </summary>
+        /// <returns></returns>
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+
 
         public void Dispose()
         {
             Dispose(true);
+
             GC.SuppressFinalize(this);
         }
-
-        ~UnitOfWork() => Dispose(false);
-
         protected virtual void Dispose(bool disposing)
         {
-            if (_disposed)
-                return;
-
-            if (disposing)
+            if (!_disposed)
             {
-                _trans?.Dispose();
-                _connection?.Dispose();
+                if (disposing)
+                {
+                    // clear repositories
+                    if (_repositories != null)
+                    {
+                        _repositories.Clear();
+                    }
+
+                    // dispose the db context.
+                    _context.Dispose();
+                }
             }
 
-            _trans = null;
-            _connection = null;
             _disposed = true;
         }
-
 
     }
 }

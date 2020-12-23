@@ -1,31 +1,64 @@
 ﻿using amsv2.Model.Entitys;
 using amsv2.Repository.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace amsv2.Repository.UnitOfWork
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork<TContext> : IDisposable where TContext : DbContext
     {
         /// <summary>
-        /// 事务
+        /// 获取DBContext
         /// </summary>
-        IDbContextTransaction DbTransaction { get; }
+        /// <returns></returns>
+        TContext DbContext { get; }
+        /// <summary>
+        /// 开始一个事务
+        /// </summary>
+        /// <returns></returns>
+        IDbContextTransaction BeginTransaction();
 
         /// <summary>
-        /// 开启事务
+        /// 获取指定仓储
         /// </summary>
-        void BeginTransaction();
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="hasCustomRepository">如有自定义仓储设为True</param>
+        /// <returns></returns>
+        IRepository<TEntity,long> GetRepository<TEntity>(bool hasCustomRepository = false) where TEntity : Entity;
+
         /// <summary>
-        /// 提交事务
+        /// DbContext提交修改
         /// </summary>
-        void Commit();
+        /// <returns></returns>
+        int SaveChanges();
+
         /// <summary>
-        /// 回滚事务
+        /// DbContext提交修改（异步）
         /// </summary>
-        void Rollback();
+        /// <returns></returns>
+        Task<int> SaveChangesAsync();
+
+        /// <summary>
+        /// 执行原生sql语句
+        /// </summary>
+        /// <param name="sql">sql语句</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        int ExecuteSqlCommand(string sql, params object[] parameters);
+
+        /// <summary>
+        /// 使用原生sql查询来获取指定数据
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        IQueryable<TEntity> FromSql<TEntity>(string sql, params object[] parameters) where TEntity : Entity;
     }
 }

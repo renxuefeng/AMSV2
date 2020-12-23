@@ -15,7 +15,7 @@ namespace amsv2.Repository.IRepositories
     {
 
     }
-    public interface IRepository<TEntity, TPrimaryKey> : IScopeDependency//IRepository where TEntity : Entity<TPrimaryKey>
+    public interface IRepository<TEntity, TPrimaryKey> : IScopeDependency //where TEntity : Entity<TPrimaryKey>//IRepository where TEntity : Entity<TPrimaryKey>
     {
         /// <summary>
         /// 获取列表

@@ -19,13 +19,11 @@ namespace AMSV2.Controllers
         private readonly ResponseData _responseData;
         private readonly IUserInfoService _userInfoService;
         private readonly IRoleRepository _roleRepository;
-        private readonly IUnitOfWork _unitOfWork;
-        public RoleController(ResponseData responseData, IUserInfoService userInfoService, IUserRepository userRepository, IRoleRepository roleRepository, IUnitOfWork unitOfWork)
+        public RoleController(ResponseData responseData, IUserInfoService userInfoService, IUserRepository userRepository, IRoleRepository roleRepository)
         {
             _responseData = responseData;
             _userInfoService = userInfoService;
             _roleRepository = roleRepository;
-            _unitOfWork = unitOfWork;
         }
         /// <summary>
         /// 获取角色列表

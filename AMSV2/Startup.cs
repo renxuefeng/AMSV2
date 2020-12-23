@@ -42,7 +42,7 @@ namespace AMSV2
         {
             services.InitializationIOC(Configuration);
             services.AddDbContext<AMSV2DbContext>(options =>
-   options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
+   options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")),ServiceLifetime.Transient);
             services.AddCors();
             // 自定义模型验证返回结果 by rxf 2019.08.26
             services.Configure<ApiBehaviorOptions>(options =>
@@ -162,8 +162,8 @@ namespace AMSV2
             app.UseAuthentication();
             // Use Localization
             app.ConfigureLocalization();
-            app.UseCors(builder =>
-            builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            //添加跨域
+            app.UseCors(StartupHelper.MyAllowSpecificOrigins);
             // 记录请求中间件
             app.UseLogReqResponseMiddleware();
             app.UseRouting();

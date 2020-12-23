@@ -15,8 +15,8 @@ namespace amsv2.Repository.Repositories
 {
     public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
     {
-        protected readonly AMSV2DbContext _dbContext;
-        public RepositoryBase(AMSV2DbContext dbContext)
+        protected readonly DbContext _dbContext;
+        public RepositoryBase(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -156,9 +156,9 @@ namespace amsv2.Repository.Repositories
         }
 
     }
-    public abstract class RepositoryBase<TEntity> : RepositoryBase<TEntity,long> where TEntity : Entity
+    public class RepositoryBase<TEntity> : RepositoryBase<TEntity,long> where TEntity : Entity
     {
-        public RepositoryBase(AMSV2DbContext dbContext) : base(dbContext)
+        public RepositoryBase(DbContext dbContext) : base(dbContext)
         {
         }
     }
